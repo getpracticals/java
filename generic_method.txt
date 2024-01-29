@@ -1,0 +1,27 @@
+package generic;
+
+public class genericmethods {
+	
+		  public static void main(String[] args) {
+
+		    // initialize the class with Integer data
+		    DemoClass demo = new DemoClass();
+
+		    // generics method working with String
+		    demo.<String>genericsMethod("Java programming to demonstrate Generic Methods");
+
+		    // generics method working with integer
+		    demo.<Integer>genericsMethod(50);
+		  }
+		}
+
+		class DemoClass {
+
+		  // creae a generics method
+		  public <T> void genericsMethod(T data) {
+		    System.out.println("Generics Method:");
+		    System.out.println("Data Passed: " + data);
+		  }
+		
+
+}
