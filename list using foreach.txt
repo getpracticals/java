@@ -1,0 +1,20 @@
+package listinterface;
+
+import java.util.*;
+
+public class Listinterface {
+	 public static void main(String args[]) {
+	      ArrayList<String> list = new ArrayList<String>();
+
+	      list.add("Hello");
+	      list.add("Omkar");
+	      list.add("How Are You?");
+	      System.out.println("ArrayList:" + list);
+	      //System.out.println("root is at index: " + list.indexOf(10));
+	      for(String s:list){  
+	    	     System.out.println(s);  
+	    	   }  
+
+	  
+	   }
+}

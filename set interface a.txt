@@ -1,0 +1,22 @@
+package setinterface;
+import java.util.*;
+public class Setinterface {
+public static void main(String[] args) {
+Set<String> items = new HashSet<>(Arrays.asList("Nishant", "Ashish",
+"Anirudh", "Manav", "Shreyas","Omkar","Harsh","Sen","Siddharth"));
+ // Get an Iterator for the set
+ Iterator<String> iterator = items.iterator();
+ System.out.println("Printing items in the set:");
+ while (iterator.hasNext()) {
+ System.out.println(iterator.next());
+ }
+ // Convert the Set to a List
+ List<String> itemList = new ArrayList<>(items);
+ // Reverse the list
+ Collections.reverse(itemList);
+ System.out.println("\nPrinting items in reverse order:");
+ for (String item : itemList) {
+ System.out.println(item);
+ }
+}
+}

@@ -1,0 +1,46 @@
+4.  Write a program to demonstrate JSP Directives 
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ include file="header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JSP Directives</title>
+</head>
+<body>
+    <h2>Welcome to JSP Directives!</h2>
+    <c:out value="${'I still have my friends!'}"/>
+    <%@ include file="footer.jsp" %>
+</body>
+</html>
+
+
+
+
+5.Write a program to demonstrate Session Tracking using Cookies 
+Code:
+<%@ page import="java.io.PrintWriter" %>
+<%
+    // Get the current session or create a new one
+    HttpSession session1 = request.getSession(true);
+
+    // Set session attribute
+    session1.setAttribute("username", "Session:ok");
+
+    // Create a cookie for the username
+    Cookie usernameCookie = new Cookie("username", "Cookie:om");
+    response.addCookie(usernameCookie);
+%>
+<html>
+<head><title>Session Tracking Using Cookies</title></head>
+<body>
+    <h2>Session Tracking Using Cookies</h2>
+    <p>Username stored in session: <%= session1.getAttribute("username") %></p>
+    <p>Username stored in cookie: <%=  usernameCookie.getValue() %></p>
+</body>
+</html>
+Output: 
+
+

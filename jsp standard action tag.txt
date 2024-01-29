@@ -1,0 +1,52 @@
+Action_cookie_main.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%
+Cookie username = new Cookie("username",request.getParameter("username"));
+Cookie email = new Cookie("email",request.getParameter("email"));
+
+username.setMaxAge(60*60*10);
+email.setMaxAge(60*60*10);
+
+response.addCookie(username);
+response.addCookie(email);
+
+%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Standard Action Tags</title>
+</head>
+<body>
+<b>username:</b>
+<%= request.getParameter("username")%>
+<br><br>
+<b>Email:</b>
+<%= request.getParameter("email") %>
+</body>
+</html>
+
+Action_cookie.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<form action="action_cookie_main.jsp" method="get">
+Username:<input type="text" name="username">
+<br><br>
+
+Email:<input type="text" name="email">
+<br><br>
+<input type="submit" value="submit">
+</form>
+</body>
+</html>
+

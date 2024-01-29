@@ -1,0 +1,19 @@
+package listinterface;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ListInterface2 {
+	public static void main(String[] args) {
+		      ArrayList<String> arr = new ArrayList<String>();
+		      arr.add("Hello");
+		      arr.add("Omkar");
+		      arr.add("How Are You");
+		      System.out.println(arr);
+		      Iterator<String> it= arr.iterator();
+		      for (int i = arr.size()-1; i >=0; i--) {
+			      System.out.println(arr.get(i));
+			    }
+		    	  
+	}
+
+}

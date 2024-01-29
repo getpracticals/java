@@ -1,0 +1,61 @@
+package lambdaExpression;
+//Q1. Write a java program to execute Lambda Expression without parameter.
+public class LambdaExpression {
+interface Hello {
+void hello();
+}
+public static void main(String[] args) {
+Hello obj = () -> System.out.println("Hello Omkar Good Afternoon");
+obj.hello();	
+}
+}
+
+
+
+
+
+package lambdaExpression;
+//Q2. Write a java program to execute Lambda Expression with single parameter.
+interface Sayable {
+	public String say(String name);
+
+}
+
+public class SingleParameter {
+	public static void main(String[] args) {
+		Sayable S1 = (name) -> {
+			return "Hello," + name;
+
+		};
+		System.out.println(S1.say("Omkar Phadke"));
+		Sayable S2 = (name) -> {
+			return "Omkar your " + name;
+		};
+		System.out.println(S2.say("Roll No is :102"));
+
+	}
+}
+
+
+
+
+package lambdaExpression;
+//Q3. Write a java program to execute Lambda Expression with multiple parameter.
+
+interface Addition{
+	int add(int a, int b);
+}
+
+public class MultipleParameter {
+	public static void main(String[] args) {
+		Addition ad1=(a,b)->(a+b);
+		System.out.println("Addition is: "+ad1.add(50, 50));
+		
+		Addition ad2=(int x,int y)->(x+y);
+		System.out.println("Addition is: "+ad2.add(5,8));
+		
+		
+	}
+	
+
+}

@@ -1,0 +1,71 @@
+a ction_tags.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>action tag</title>
+</head>
+<body>
+<h1>JSP Action Tags Demonstration</h1>
+<!-- jsp:include action tag -->
+<h3>Use of include action tags</h3>
+<jsp:include page="header.jsp" />
+
+<!-- jsp:useBean action tag -->
+<h3>Use of useBean action tags</h3>
+<jsp:useBean id="date" class="java.util.Date" /> Current Date: <%= date %><br><br>
+</body>
+</html>
+
+h eader.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>document</title>
+</head>
+<body>
+<h2>Header Page</h2>
+<p>This is a header page that can be included in multiple pages using the jsp:include action tag.</p>
+</body>
+</html>
+
+
+O utput:
+
+
+7)Action Tags:-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>forward tag</title>
+</head>
+<body>
+<h1>JSP Action Tags Demonstration</h1>
+<!-- jsp:forward action tag -->
+<h3>Use of forward action tags</h3>
+<jsp:forward page="forwardPage.jsp" />
+</body>
+</html>
+
+f orwardPage.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Forward Page</h2>
+<p>This is a page that can be forwarded to using the jsp:forward action tag.</p>
+</body>
+</html>

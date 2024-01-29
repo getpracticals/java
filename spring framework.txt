@@ -1,0 +1,135 @@
+A) Write a program to print Singer Name and Age using spring framework. 
+Maven project 
+1)Open Eclipse IDE, Navigate to File, then New, then Others., Select Maven Project, Click on the “Next” button.
+
+
+2)Check the option ‘use default workspace location or choose your desired workspace location.
+
+3)Select catalog Internal the archetype ‘maven-archetype-quickstart’.Click on the “Next” button
+
+
+4) Enter your project’s Group Id. Enter your project’s Artifact Id. Click on the “Finish” button.
+
+
+
+
+
+Pom.xml 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.springMca</groupId>
+  <artifactId>springMca</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>springMca</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+	  
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>5.2.3.RELEASE</version>
+	</dependency>  
+	  
+	  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>5.2.3.RELEASE</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-aop</artifactId>
+	    <version>5.2.3.RELEASE</version>
+	</dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+
+ 
+POJO class 
+
+package MCA;
+
+public class Singer {
+	private String name;
+	private Integer age;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public Singer(String name, Integer age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	public Singer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Singer [name=" + name + ", age=" + age + "]";
+	}
+	
+}
+
+Configuration xml 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:c="http://www.springframework.org/schema/c" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+<bean class="MCA.Singer" name="singer" p:Name="Luffy" p:Age="19"/>
+
+ </beans>
+ 
+Main class 
+
+package MCA;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class test {
+	public static void main(String[] args) {
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("MCA/mcaConfig.xml");
+		Singer temp = (Singer) context.getBean("singer");
+		System.out.println(temp);
+	}
+}
+
+
+

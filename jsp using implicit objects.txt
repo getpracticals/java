@@ -1,0 +1,92 @@
+1. Write Programs to demonstrate different Implicit Objects
+a. OUT
+
+Code:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="ISO-8859-1">
+<title>Implicit OUT</title>
+</head>
+<body>
+<% int num1=100; int num2=200;
+out.println("num1 is "+num1);
+out.println("<br>num2 is "+num2);
+%>
+</body>
+</html>
+
+
+b. Request
+Code:
+
+RequestObj.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Request Object</title>
+</head>
+<body>
+<form action="form1.jsp">
+<input type="text" name="Username">
+<input type="submit" value="submit">
+</form>
+</body>
+</html>
+
+form1.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<% String Username = request.getParameter("Username");
+out.println("Welcome "+Username);%>
+</body>
+</html>
+
+
+
+
+
+c. Session Code:
+Session.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Session</title>
+</head>
+<body>
+<% session.setAttribute("User", "Nishant Rane"); %>
+<a href="Implicit.jsp">Click here to here User name</a>
+</body>
+</html>
+
+Implicit.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<% String name=(String)session.getAttribute("user");
+out.println("User Name is: "+name);
+%>
+</body>
+</html>

@@ -1,0 +1,153 @@
+Aspect advices
+//////////student.java
+package com.example.demo;
+
+public class Student {
+	String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Student(String name) {
+		super();
+		this.name = name;
+	}
+	
+public void msg()
+{
+	System.out.println("hello");
+}
+}
+///////////studentAspect
+package com.example.demo;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class StudentAspect {
+	Logger log=LoggerFactory.getLogger(getClass());
+	@Before("execution(* com.example.demo.*.*(..))")
+	public void beforeAdvice(JoinPoint jp)
+	{
+		System.out.println("before:"+jp.getSignature().getName());
+		log.info("before global"+jp.getSignature().getName());
+	}
+	@After("execution(* com.example.demo.StudentService.*(..))")
+	public void afterAdvice(JoinPoint jp)
+	{
+		System.out.println("after:"+jp.getSignature().getName());
+	}
+	
+	@Before("execution(* com.example.demo.StudentService.show(..))")
+	public void beforeAddShow(JoinPoint jp)
+	{
+		System.out.println("before adding student:"+jp.getSignature().getName());
+		log.info("before add logged"+jp.getSignature().getName());
+	}
+	@After("execution(* com.example.demo.StudentService.show(..))")
+	public void afterAddShow(JoinPoint jp)
+	{
+		System.out.println("before adding student:"+jp.getSignature().getName());
+		log.info("before add logged"+jp.getSignature().getName());
+	}
+	@Around("execution(* com.example.demo.StudentService.show(..))")
+	public void aroundAddShow(JoinPoint jp)
+	{
+		System.out.println("before adding student:"+jp.getSignature().getName());
+		log.info("before add logged"+jp.getSignature().getName());
+	}
+	@AfterReturning("execution(* com.example.demo.StudentService.show(..))")
+	public void afterreturnAddShow(JoinPoint jp)
+	{
+		System.out.println("before adding student:"+jp.getSignature().getName());
+		log.info("before add logged"+jp.getSignature().getName());
+	}
+	@AfterThrowing("execution(* com.example.demo.StudentService.show(..))")
+	public void afterthrowAddShow(JoinPoint jp)
+	{
+		System.out.println("before adding student:"+jp.getSignature().getName());
+		log.info("before add logged"+jp.getSignature().getName());
+	}
+	@After("execution(* com.example.demo.StudentService.addStudent(..))")
+	public void afterAddAdvice(JoinPoint jp)
+	{
+		System.out.println("after adding student:"+jp.getSignature().getName());
+	}
+	@Around("execution(* com.example.demo.StudentService.addStudent(..))")
+	public void aroundAddAdvice(JoinPoint jp)
+	{
+		System.out.println("after adding student:"+jp.getSignature().getName());
+	}
+}
+///////////////studentService.java
+package com.example.demo;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
+
+@Service("s")
+public class StudentService {
+	ArrayList<Student> a=new ArrayList<Student>();
+	public void show()
+	{
+		System.out.println("aspect example");
+	}
+	public String addStudent(Student s)
+	{
+		a.add(s);
+		return "added";
+	}
+
+}
+////////predefineclass.java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+@SpringBootApplication
+@EnableAspectJAutoProxy
+public class AspectEgApplication {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext ac= SpringApplication.run(AspectEgApplication.class, args);
+		StudentService ss=(StudentService)ac.getBean("s");
+		ss.show();
+		Student j=new Student("satyam");
+		System.out.println(ss.addStudent(j));
+	
+	}
+
+}
+//////dependency  pom.xml
+</build>
+  <dependencies>
+	  <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.13</version>
+</dependency>
+ <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.0.2.RELEASE</version>
+</dependency>
+  </dependencies>

@@ -1,0 +1,120 @@
+dependency
+////////////////student.java
+package com.example.demo;
+
+public class Student {
+	String name;
+    Employee e;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
+	public Employee getE() {
+		return e;
+	}
+
+	public void setE(Employee e) {
+		this.e = e;
+	}
+
+	public Student() {
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + "]";
+	}
+	
+
+}
+////////////////employee.java
+package com.example.demo;
+
+public class Employee {
+String name;
+Student s;
+public Employee() {
+	super();
+	
+}
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public Student getS() {
+	return s;
+}
+
+public void setS(Student s) {
+	this.s = s;
+}
+
+@Override
+public String toString() {
+	return "Employee [name=" + name + "]";
+}
+
+
+}
+/////////predefine.java
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+@SpringBootApplication
+public class DiallApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DiallApplication.class, args);
+	  ApplicationContext  ac=new ClassPathXmlApplicationContext("NewFile.xml");
+	  Student s=(Student)ac.getBean("s");
+	  System.out.println(s.toString());
+	  Employee s1=(Employee)ac.getBean("e");
+	  System.out.println(s1.toString());
+	}
+
+}
+//////////////////xml
+<?xml version="1.0" encoding="UTF-8"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        <bean class="com.example.demo.Student" id="s">
+        <property name="name" value="ajay"></property>
+        <property name="e" ref="e"></property>
+      <!--    <constructor-arg value="Omkar"></constructor-arg>
+          <constructor-arg ref="e"></constructor-arg> -->
+        </bean>
+        <bean class="com.example.demo.Employee" id="e">
+      <!--   <constructor-arg value="Omkar"></constructor-arg>
+          <constructor-arg ref="s"></constructor-arg> -->
+          <property name="s" ref="s"></property>
+          <property name="name" value="acb"></property>
+        </bean>
+        </beans>
+///////////forconstructor remove<!--
+
+pom.xml
+</build>
+  <dependencies>
+	  <dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-context</artifactId>
+	  <version>6.1.2</version>
+	  </dependency>
+  </dependencies>

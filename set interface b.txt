@@ -1,0 +1,28 @@
+package setinterface;
+import java.util.*;
+public class Setinterface1 {
+	public static void main(String[] args) {
+		Set<String> hset=new HashSet<String>();
+		//Add Function
+		hset.add("Apple");
+		hset.add("Mango");
+		hset.add("Banana");
+		hset.add("Orange");
+		hset.add("Grapes");
+		System.out.println("After Using Add Function: "+hset);
+		//Remove Function
+		hset.remove("Mango");
+		System.out.println("After Using Remove Function: "+hset);
+		String check="Grapes";
+		System.out.println(hset);
+		System.out.println("Contain "+" "+ check+" "+"is "+hset.contains(check)+".");
+		Set<String> hset1 = new HashSet<String>();
+		hset1.addAll(Arrays.asList(new String[] { "ABC", "XYZ", "MNO", "EFG" }));
+		Set<String> hset2 = new HashSet<String>();
+		hset2.addAll(Arrays.asList(new String[] { "KLM", "HIJ", "PQR", "STY" }));
+		Set<String> union = new HashSet<String>(hset1);
+		union.addAll(hset2);
+		System.out.println("Union of the Hset1 and Hset2 Set: ");
+		System.out.println(union);
+	}
+}

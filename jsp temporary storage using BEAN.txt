@@ -1,0 +1,85 @@
+PersonBean.java
+
+
+package Person;
+public class PersonBean{
+	private String FirstName;
+	private String LastName;
+	private String Email;
+	public String getFirstName() {
+		return FirstName;
+	}
+	public void setFirstName(String FirstName) {
+		this.FirstName = FirstName;
+	}
+	public String getLastName() {
+		return LastName;
+	}
+	public void setLastName(String LastName) {
+		this.LastName = LastName;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String Email) {
+	    this.Email = Email;
+	}
+}
+
+
+
+Person.jsp
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Person Bean Test</title>
+</head>
+<body>
+<%
+if("POST".equalsIgnoreCase(request.getMethod())&&request.getParameter("Submit")!= null)
+
+	%>
+	<jsp:useBean id="PersonBean" class="Person.PersonBean" scope="session">
+	<jsp:setProperty name="PersonBean" property="*"/>
+	</jsp:useBean>
+	<%	
+	out.println("First Name: "+PersonBean.getFirstName());
+	out.println("<br>Last Name: "+PersonBean.getLastName());
+	out.println("<br>Email: "+PersonBean.getEmail());
+	
+
+	%>
+</body>
+</html>
+
+
+
+Form.jsp
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="POST" action="person.jsp">
+<h1>Person Form</h1>
+First Name: <input type="text" name="FirstName">
+<br><br>
+Last Name: <input type="text" name="LastName">
+<br><br>
+Email: <input type="text" name="Email">
+<br><br>
+<Button type="Submit" name="Submit">Submit</Button>
+</form>
+</body>
+</html>

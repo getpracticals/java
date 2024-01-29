@@ -1,0 +1,38 @@
+package mapinterface;
+import java.util.*;
+public class MapInterface {
+public static void main(String[] args) {
+// a. Add items in the map
+ Map<String, String> map1 = new HashMap<>();
+ map1.put("Omkar", "Phadke");
+ map1.put("Satyam", "yadav");
+ map1.put("Yash", "Parab");
+ System.out.println("A]\tMap1: " + map1);
+ // b. Remove items from the map
+ map1.remove("Yash");
+ System.out.println("B]\tAfter removing 'Yash' from map1, map1: " +
+map1);
+ // c. Search specific key from the map
+ String key = "SHREYAS";
+ if (map1.containsKey(key)) {
+ System.out.println("C]\t'" + key + "' is found in the map.");
+ } else {
+ System.out.println("C]\t'" + key + "' is not found in the map.");
+ }
+ // d. Get value of the specified key
+ String value = map1.get(key);
+ System.out.println("D]\tThe value of '" + key + "' is: " + value);
+ // e. Insert map elements of one map into another map
+ Map<String, String> map2 = new HashMap<>();
+ map2.put("OMKAR", "PHADKE");
+ map2.put("SEN", "SABU");
+ map1.putAll(map2);
+ System.out.println("E]\tAfter adding map2 into map1, map1: " + map1);
+ // f. Print all keys and values of the map
+ for (Map.Entry<String, String> entry : map1.entrySet()) {
+
+ System.out.println("F]\tKey: " + entry.getKey() + ", Value: " +
+entry.getValue());
+ }
+}
+}	

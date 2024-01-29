@@ -1,0 +1,37 @@
+package lambdaExpression;
+@FunctionalInterface
+interface Adder2 {
+ int add(int a, int b);
+}
+@FunctionalInterface
+interface Subtractor {
+ int subtract(int a, int b);
+}
+public class WithoutReturnKeyword {
+public static void main(String[] args) {
+Adder2 adder = (a, b) -> a + b;
+ Subtractor subtractor = (a, b) -> a - b;
+ int sum = adder.add(10, 9);
+ System.out.println("The sum is: " + sum);
+ int difference = subtractor.subtract(9, 2);
+ System.out.println("The difference is: " + difference);
+}
+}
+
+
+
+
+package lambdaExpression;
+@FunctionalInterface
+interface ConcatenateInterface {
+ String concatenate(String a, String b);
+}
+public class Concatenate {
+public static void main(String[] args) {
+ConcatenateInterface concat = (String a, String b) -> a + b;
+ String str1 = "Anup Kumar ";
+ String str2 = "Bouns ka Badsha";
+ String result = concat.concatenate(str1, str2);
+ System.out.println(result);
+}
+}
