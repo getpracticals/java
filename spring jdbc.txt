@@ -1,0 +1,153 @@
+Aim: Assignment Based Spring Jdbc 
+A. Write a program to insert, update and delete
+Pom.xml 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mca</groupId>
+  <artifactId>springJDBC</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>springJDBC</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+	  
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>5.2.3.RELEASE</version>
+	</dependency>  
+	  
+	  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>5.2.3.RELEASE</version>
+	</dependency>	  
+	  
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>5.2.3.RELEASE</version>
+	</dependency>
+	  
+	 <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.20</version>
+	</dependency>
+ 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+Config.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:c="http://www.springframework.org/schema/c" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="ds">
+<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:3306/springjdbc" />
+<property name="username" value="root"/>
+<property name="password" value="root"/>
+</bean>
+
+<bean class="org.springframework.jdbc.core.JdbcTemplate" name="jdbcTemplate" p:dataSource-ref="ds"/>
+
+</beans>
+
+
+
+Main class
+
+package com.mca;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "kaizokuo ni ore wa naru!" );
+        ApplicationContext context = new ClassPathXmlApplicationContext("com/mca/config.xml");
+        JdbcTemplate temp = context.getBean("jdbcTemplate", JdbcTemplate.class);
+        
+//        insert Query 
+        String query1 = "insert into strawHat values(?,?,?)";
+        String query2 = "update strawHat set bounty=? where id=?";
+        String query3 = "delete from strawHat where id=?";
+        
+//        fire query
+        int result1 = temp.update(query1,2,"zoro","1.2 Billion");
+        System.out.println("Number of records insetred " + result1);
+        
+        int result2 = temp.update(query2,"4 billion",1);
+        System.out.println("Number of records updated " + result2);
+        
+        int result3 = temp.update(query3,5);
+        System.out.println("Number of records Deleted " + result3);
+    }
+}
+
+B.)Write a program to demonstrate PreparedStatement in Spring JdbcTemplate
+
+Main class 
+package com.mca;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "kaizokuo ni ore wa naru!" );
+        ApplicationContext context = new ClassPathXmlApplicationContext("com/mca/config.xml");
+        JdbcTemplate temp = context.getBean("jdbcTemplate", JdbcTemplate.class);
+        
+        String query1 = "insert into strawHat(id,name,bounty) values(?,?,?)";
+        int result = temp.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				
+				PreparedStatement ps = con.prepareStatement(query1);
+				ps.setInt(1, 3);
+				ps.setString(2, "zoro");
+				ps.setString(3, "1.1 Billion");
+				
+				return ps;
+			}
+		});
+        
+        System.out.println("Number of rows afftected " + result);
+       
+    }
+}
+ 

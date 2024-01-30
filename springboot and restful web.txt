@@ -1,0 +1,42 @@
+Aim: ASSIGNMENT BASED SPRING BOOT AND RESTFUL WEB SERVICES
+Write a program to create a simple Spring Boot application prints a message
+
+1)	Go to Spring Initializr. Select the type of project (Maven).
+Choose the language (Java). Select the Spring Boot version.
+Fill in the project metadata. Add the necessary dependencies (at least spring-boot-starter-web). Click on “Generate” to download the project.
+
+
+ 
+
+
+ 
+2)  Open Eclipse IDE. Navigate to File > Import.
+     Select “Existing Maven Projects”. Click on “Next”.
+     Click on “Browse” and navigate to the location where you downloaded the project.
+     Make sure the pom.xml file is checked. Click on “Finish”.
+
+                  
+     
+Main class 
+package com.mca.spring;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+public class myApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(myApplication.class, args);
+    }
+
+    @RestController
+    public class controller {
+        @GetMapping("/")
+        public String quote() {
+            return "Hero? No! We’re pirates! I love heroes, but I don’t wanna be one!";
+        }
+    }
+}
