@@ -1,0 +1,64 @@
+package SetPractical3;
+import java.util.*;
+
+public class SetOprations {
+	
+	public static void main(String[]args)
+	{
+		
+		Set<String> s1=new HashSet<String>();
+		
+		// Adding elemets in the Set
+		
+		s1.add("satyam");
+		s1.add("chandan");
+		s1.add("ashutosh");
+		s1.add("prashant");
+		s1.add("yash");
+		s1.add("omkar");
+		
+		Iterator itr=s1.iterator();
+		System.out.println("Printing the elemets of the Set 1:");
+		while(itr.hasNext())
+		{
+			System.out.println(itr.next());
+		}
+		
+		//Inserting the items of one set into the another
+		
+		Set<String> s2=new HashSet<String>();
+		s2.add("Vikram");
+		s2.add("Manish");
+		s2.add("prasand");
+		s2.add("Prince");
+		s2.addAll(s1);
+		Iterator ite=s2.iterator();
+		System.out.println("");
+		System.out.println("Printing the elemets of the Set 2:");
+		while(ite.hasNext())
+		{
+			System.out.println(ite.next());
+		}
+		
+		//Removing Item from the set
+		
+		s2.remove("Manish");
+		System.out.println(""); //for Space only
+		System.out.println(s2);
+		
+		//Searching a specified item from the set
+		
+		boolean val=s2.contains("satyam");
+		
+		System.out.println("");
+		if(val==true)
+		{
+			System.out.println("the Set have the specified element");
+		}
+		else
+		{
+			System.out.println("the set does not contains the specified element");
+		}
+		}
+
+}
